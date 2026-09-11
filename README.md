@@ -47,7 +47,7 @@ START → understand → search → rank → reflect → END
    * **可能解法**：由于难以直接用 LLM 自我评分（容易陷入“它是否真的懂梗”的裁判悖论），系统急需引入 **Human-in-the-Loop（人在回路）** 的显式/隐式偏好反馈。
 3. **缺乏多 Agent 协作与深度思考 (Lack of Agent Collaboration)**
    * **现状**：目前仅由单一 Agent 盲目直接输出 `image_search_queries` 和情绪分析，缺乏分工。
-   * **可能解法**：参考类似 **DeepSeek Chain of Thought (CoT)** 的深度思考模式，或多 Agent 分工机制（如参考论文 [_TransMeme: A Multi-Agent Framework for Cross-Cultural Meme Transcreation_](https://arxiv.org/abs/2403.xxxxx) 这样具备跨文化、多角色协作的框架）。
+   * **可能解法**：参考类似 **DeepSeek Chain of Thought (CoT)** 的深度思考模式，或多 Agent 分工机制（如参考论文 [_TransMeme: A Multi-Agent Framework for Cross-Cultural Meme Transcreation_](https://arxiv.org/abs/2608.27127) 这样具备跨文化、多角色协作的框架）。
 4. **单一搜索引擎瓶颈**
    * **现状**：仅依赖 DuckDuckGo 免费搜索。
    * **可能解法**：未来应扩展为多源异构检索，增加专门抓取表情包或结构化标签的专用搜索引擎/API。
