@@ -1,0 +1,58 @@
+{
+  "e7f93f3f-9455-455d-a1fe-ecef348b5214": {
+    "id": "e7f93f3f-9455-455d-a1fe-ecef348b5214",
+    "title": "今天是个好天气，如果不用上班就更好了",
+    "created_at": "2026-09-10T13:27:24.267241+00:00",
+    "updated_at": "2026-09-10T13:31:15.627586+00:00",
+    "messages": [
+      {
+        "role": "user",
+        "content": "今天是个好天气，如果不用上班就更好了"
+      },
+      {
+        "role": "assistant",
+        "content": "我把这句话理解为「轻松调侃中带一点无奈与向往自由」：打工人式自嘲吐槽，用假设语气表达不想上班。优先尝试 Drake Hotline Bling、Distracted Boyfriend、This Is Fine；下面是按匹配度排过序的候选。"
+      },
+      {
+        "role": "user",
+        "content": "他娘的，这HR怎么能这么欺负人"
+      },
+      {
+        "role": "assistant",
+        "content": "我把这句话理解为「愤怒、憋屈、强烈不平」：爆粗口式吐槽，表达对HR权力滥用的愤慨但可能无力正面反抗。优先尝试 Woman Yelling at a Cat、Distracted Boyfriend、This Is Fine；下面是按匹配度排过序的候选。"
+      },
+      {
+        "role": "user",
+        "content": "再见了时间"
+      },
+      {
+        "role": "assistant",
+        "content": "我把这句话理解为「无奈、悲壮、荒诞，带一点摆烂式自嘲」：用夸张仪式感向时间告别，实则自嘲被时间抛弃或追不上时间。优先尝试 SpongeBob Time Card、This Is Fine、Distracted Boyfriend；下面是按匹配度排过序的候选。"
+      },
+      {
+        "role": "user",
+        "content": "大狗大狗叫叫叫"
+      },
+      {
+        "role": "assistant",
+        "content": "我把这句话理解为「 playful、亢奋、卖萌中带一点发疯」：玩梗式起哄/装傻，并非认真描述狗叫。优先尝试 Buff Doge vs Cheems、Doge、Doggo bork meme；下面是按匹配度排过序的候选。"
+      }
+    ]
+  },
+  "09ecc600-ce73-47a2-932b-985b5c83ebaf": {
+    "id": "09ecc600-ce73-47a2-932b-985b5c83ebaf",
+    "title": "大狗大狗叫叫叫",
+    "created_at": "2026-09-11T09:16:38.988439+00:00",
+    "updated_at": "2026-09-11T09:17:04.911436+00:00",
+    "messages": [
+      {
+        "role": "user",
+        "content": "大狗大狗叫叫叫"
+      },
+      {
+        "role": "assistant",
+        "content": "我把这句话理解为「awkwardness / helplessness」：self-deprecating reaction to an uncomfortable social moment。优先尝试 This Is Fine、Disaster Girl、side eye reaction；下面是按匹配度排过序的候选。"
+      }
+    ]
+  }
+}
