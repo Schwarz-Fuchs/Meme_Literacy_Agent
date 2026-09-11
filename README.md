@@ -1,6 +1,6 @@
 # Meme Literacy Agent: Intent-Driven Meme Retrieval & Multi-Agent Alignment
 
-> **核心主张**：真正的 Meme 检索不是“把用户原话盲目塞进搜索引擎”。本系统构建了一个**认知智能 Agent 架构**，通过多 Agent 深度思考解构用户的幽默机制与情绪隐喻，并引入多模态视觉对齐（VLM-in-the-loop）解决传统文本匹配“文不对图”的痛点。
+> **核心主张**：真正的 Meme 检索不是“把用户原话盲目塞进搜索引擎”。本系统构建了一个**基于LangGraph 的 AI-Agent 架构**，意图通过多 Agent 深度思考解构用户的幽默机制与情绪隐喻，并引入多模态视觉对齐（VLM-in-the-loop）解决传统文本匹配“文不对图”的痛点。
 
 ## 🚀 快速运行
 
