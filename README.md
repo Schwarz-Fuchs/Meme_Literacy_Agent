@@ -4,15 +4,19 @@
 
 ## 🚀 快速运行
 
-#### 1.配置运行环境
-
+#### 1. 克隆项目并创建虚拟环境
+```powershell
+conda create -n [env_name] python=3.11 -y
+conda activate [env_name]
+```
+#### 2. 安装依赖
 ```powershell
 pip install -r requirements.txt
 ```
-#### 2.编辑 .env，填入你的 API key；也可暂时跳过，程序会使用规则回退
+#### 3.编辑 .env文件，填入你的 API key；也可暂时跳过，程序会使用规则回退
 [点击查看设置](.env)
 
-#### 3.激活环境后启动 app
+#### 4.激活环境后启动 app (请先cd到app.py所在目录)
 ```powershell
 streamlit run app.py
 ```
@@ -26,35 +30,39 @@ START → understand → search → rank → reflect → END
           LLM 意图      DDG     基线排序   展示/追问
 ```
 
+## ⚠️ 项目状态 
+
+**本仓库目前仅处于启动阶段**
+
+### 好消息
+1. **端到端可运行**：在本地环境及 DeepSeek API 支持下，能够跑起来。
+2. **结构化与可解释**：利用 Pydantic 定义了 `MemeIntent` 契约，并通过中间 Trace 日志保持全流程透明。
+
+### 坏消息
+1. **“懂用户” vs “懂 Meme” 的对齐鸿沟 (Alignment Gap)**
+   * **现状**：LLM 分析文本语境和情绪是可行的，但将其直接映射并对齐到视觉 Meme 图上效果有限。换句话说：**LLM 懂用户，但它真的懂 Meme 吗？**
+   * **可能解法**：引入 **RAG 机制**，以 *Know Your Meme* 等权威梗图数据库作为外挂知识库；或者引入 **VLM-in-the-Loop** 进行视觉校验。
+2. **多义性与用户偏好 (User Preference & Ambiguity)**
+   * **现状**：用户的输入往往具有多义性，合适的 Meme 候选可能有很多，且不同社交语境下的偏好完全不同。
+   * **可能解法**：由于难以直接用 LLM 自我评分（容易陷入“它是否真的懂梗”的裁判悖论），系统急需引入 **Human-in-the-Loop（人在回路）** 的显式/隐式偏好反馈。
+3. **缺乏多 Agent 协作与深度思考 (Lack of Agent Collaboration)**
+   * **现状**：目前仅由单一 Agent 盲目直接输出 `image_search_queries` 和情绪分析，缺乏分工。
+   * **可能解法**：参考类似 **DeepSeek Chain of Thought (CoT)** 的深度思考模式，或多 Agent 分工机制（如参考论文 [_TransMeme: A Multi-Agent Framework for Cross-Cultural Meme Transcreation_](https://arxiv.org/abs/2403.xxxxx) 这样具备跨文化、多角色协作的框架）。
+4. **单一搜索引擎瓶颈**
+   * **现状**：仅依赖 DuckDuckGo 免费搜索。
+   * **可能解法**：未来应扩展为多源异构检索，增加专门抓取表情包或结构化标签的专用搜索引擎/API。
+5. **缺少持久化存储与语义缓存 (Lack of Database & Caching)**
+   * **现状**：数据全在内存和临时 JSON 中。
+   * **可能解法**：引入轻量级数据库，用于对高频/相似输入做**语义缓存 (Semantic Cache)**，避免每次都重复调用昂贵的 LLM API。
+6. **缺乏客观验证指标 (Evaluation Paradox)**
+   * **现状**：没有设置客观的评测指标。让 LLM/VLM 自己当裁判打分会陷入“裁判本身不懂梗”的悖论，最终的校验权仍需回归人类用户。
+
 ## 核心攻坚方向
-
-### 1. 攻坚 Con 1：图文语义对齐（LLM 懂用户情绪，但如何让系统懂 Meme？）
-* **痛点**：原始基线仅依赖文本标题与关键词重合度计算，容易导致“文字对得上，图片牛头不对马嘴”。
-* **可能解决方案**：
-  * **VLM-in-the-Loop 视觉校验层**：引入视觉多模态模型作为“梗图鉴赏裁判”。将候选图片的画面与用户的 `MemeIntent`（情绪、视觉隐喻）进行联合输入，利用 VLM 动态打分并过滤低质量匹配。
-  * **CLIP/SigLIP 向量空间对齐**：将用户的抽象意图文本与候选图片统一编码至多模态嵌入空间，计算图文语义相似度。
-  * **TransMeme: A Multi-Agent Framework for Cross-Cultural Meme Transcreation**：参考一下相关文章。
-
-### 2. 攻坚 Con 2：多 Agent 协作与深度思考（参考 deepseek-R1 模式）
-* **痛点**：demo 的单 Agent 试图同时处理深层语境解构、梗文化联想和精准英文检索式转换，效果肯定不佳。
-* **可能解决方案**：将 `understand` 节点拆解为多角色对抗与协同集群：
----
-
-## 可探索路线
-
-1. **多源异构检索层**：
-   * 突破单一的 DuckDuckGo 限制，接入 **Tenor API / Giphy API** 或周期性抓取结构化标签。
-2. **知识库与持久化缓存（RAG）**：
-   * 引入向量数据库（如 Chroma / FAISS）存储高频 Meme 映射与历史偏好，避免对相同/相似输入重复调用 LLM 带来的延迟和成本。
-3. **Human-in-the-Loop 与偏好反馈（RLHF）**：
-   * 通过前端交互（如“太贴切 / 模板对但图不对”）收集用户的隐式反馈，将历史偏好写入数据库，用于后续微调检索权重。
-4. **动态热梗同步机制**：
-   * 针对网络梗“时效性强”的特点，设计后台任务定期同步主流模因网站（如 Know Your Meme）的最新词条，突破大模型的知识盲区。
+1. **攻坚 Con 1 & 2：图文语义，用户偏好对齐**
+2. **攻坚 Con 3：多 Agent 协作与深度思考**
 
 ---
-
 ## 核心工程警示
-
 - **LLM 不天然“懂梗”**：大模型提供的仅是假设生成与结构化解释，其正确性必须通过候选池、多模态视觉对齐以及用户交互闭环来验证。
 - **透明度优先**：当前的元数据基线与中间 Trace 日志均保持完全可解释，增加模块时请一同记录trace，便于在学术评估中定位误差来源。
 - **生产环境考量**：万一真实上线，需额外考虑版权合规、NSFW/仇恨内容过滤、来源白名单、API 速率限制及系统缓存。
